@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Image } from "react-native";
-import { IMAGE_HEIGHT } from "./constants";
+import { MAX_IMAGE_HEIGHT, MIN_IMAGE_HEIGHT } from "./constants";
 import Animated from "react-native-reanimated";
 
 const { Extrapolate, interpolate } = Animated;
@@ -8,11 +7,6 @@ const { Extrapolate, interpolate } = Animated;
 export const AnimatedImage = props => {
   const { y } = props;
 
-  const scale = interpolate(y, {
-    inputRange: [0, 200],
-    outputRange: [1, 0.75],
-    extrapolate: Extrapolate.CLAMP
-  });
   const blur = interpolate(y, {
     inputRange: [0, 200],
     outputRange: [0, 5],
@@ -22,7 +16,7 @@ export const AnimatedImage = props => {
 
   const height = interpolate(y, {
     inputRange: [0, 200],
-    outputRange: [IMAGE_HEIGHT, IMAGE_HEIGHT - 200],
+    outputRange: [MAX_IMAGE_HEIGHT, MIN_IMAGE_HEIGHT],
     extrapolate: Extrapolate.CLAMP
   });
   return (
